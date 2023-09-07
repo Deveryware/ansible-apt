@@ -9,3 +9,10 @@
     state: "{{ item.state | default(omit) }}"
     update_cache: "{{ item.update_cache | default('yes') }}"
   with_items: "{{ apt_repositories }}"
+
+- name: Empty sources list
+  ansible.builtin.copy:
+    content: "# Ansible managed"
+    dest: /etc/apt/sources.list
+    mode: '0644'
+  when: apt_clean_sources_list

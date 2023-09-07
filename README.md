@@ -12,6 +12,7 @@
 > * configures apt
 > * ensures packages
 > * add repositories
+> * optionnaly clean /etc/apt/sources.list
 > * add keys
 > * apt pinning
 > * manages unattended upgrades
@@ -188,6 +189,8 @@ apt_keys: []
 # apt_http_proxy_address:
 # HTTP pipeline depth (optional)
 # apt_http_pipeline_depth: 5
+# Clean /etc/apt/sources.list
+apt_clean_sources_list: false
 
 # Change Aptitudes solution costs, default is not to change anything
 # Mirror https://lists.debian.org/543FF3BD.1020609@zen.co.uk
