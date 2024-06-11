@@ -3,6 +3,6 @@
 - name: Upgrading system
   apt:
     upgrade: "{{ apt_upgrade }}"
-    update_cache: yes
+    update_cache: "{{ apt_cache_update | default('yes') }}"
     autoremove: "{{ apt_autoremove }}"
   when: (apt_upgrade == "safe") or (apt_upgrade == "full") or (apt_upgrade == "dist")

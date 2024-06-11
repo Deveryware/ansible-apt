@@ -83,6 +83,8 @@ apt_dependencies:
   - python3-pycurl
 # sets the amount of time the cache is valid
 apt_cache_valid_time: 3600
+# Run apt-get update before installing/upgrading a package
+apt_cache_update: yes
 # upgrade system: safe | full | dist
 apt_upgrade: no
 # packages to ensure
