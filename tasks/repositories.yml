@@ -16,3 +16,19 @@
     state: "{{ item.state | default(omit) }}"
     update_cache: "{{ item.update_cache | default('yes') }}"
   with_items: "{{ apt_repositories }}"
+
+- name: Configure deb822 repository
+  ansible.builtin.deb822_repository:
+    name: "{{ item.name }}"
+    types: "{{ item.type | default('deb') }}"
+    uris: "{{ item.uris }}"
+    suites: "{{ item.suites }}"
+    components: "{{ item.components }}"
+    signed_by: "{{ item.signed_by }}"
+  loop: "{{ apt_deb822_repositories }}"
+  register: repo
+
+- name: Apt update
+  ansible.builtin.apt:
+    update_cache: yes
+  when: repo.changed
