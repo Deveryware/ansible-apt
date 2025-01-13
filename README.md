@@ -81,6 +81,7 @@ apt_dependencies:
   - aptitude
   - python3-apt
   - python3-pycurl
+  - python3-debian
 # sets the amount of time the cache is valid
 apt_cache_valid_time: 3600
 # Run apt-get update before installing/upgrading a package
@@ -185,6 +186,7 @@ apt_remount_filesystems: []
 
 # repositories to register
 apt_repositories: []
+apt_deb822_repositories: []
 # gpg keys for external repositories
 apt_keys: []
 # HTTP proxy server (optional)
