@@ -59,11 +59,11 @@ apt_remove_suggests: no
 apt_remove_recommends: no
 # Enable the update/upgrade script
 apt_periodic: yes
-# Do “apt-get update” automatically every n-days (0=disable)
+# Do "apt-get update" automatically every n-days (0=disable)
 apt_update_package_lists: 1
-# Do “apt-get upgrade –download-only” every n-days (0=disable)
+# Do "apt-get upgrade -download-only" every n-days (0=disable)
 apt_download_upgradeable_packages: 0
-# Do “apt-get autoclean” every n-days (0=disable)
+# Do "apt-get autoclean" every n-days (0=disable)
 apt_auto_clean_interval: 0
 
 # enable unattended-upgrades
