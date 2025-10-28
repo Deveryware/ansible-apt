@@ -1,3 +1,13 @@
+<a name="2.15.2"></a>
+## 2.15.2 (2025-10-28)
+
+
+#### Bug Fixes
+
+*   install apt repos before installing packages deps
+
+
+
 <a name="2.12.0"></a>
 ## 2.12.0 ()
 
