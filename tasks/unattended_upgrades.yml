@@ -1,6 +1,7 @@
 ---
 
 - name: Installing packages
+  become: true
   apt:
     pkg: "unattended-upgrades"
     state: "{{ 'latest' if apt_unattended_upgrades else 'absent' }}"
