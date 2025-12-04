@@ -2,7 +2,11 @@
 name = ""
 version = "2.15.2"
 requires-python = "~=3.13.0"
-dependencies = ["commitizen"]
+dependencies = [
+  "commitizen",
+  "ansible-argument-spec-generator",
+  "aar-doc"
+  ]
 
 [dependency-groups]
 dev = []
@@ -18,3 +22,4 @@ version_provider = "uv"
 update_changelog_on_bump = true
 changelog_incremental = true
 template = "CHANGELOG.md.j2"
+pre_bump_hooks = ["aar-doc --output-mode replace . markdown"]

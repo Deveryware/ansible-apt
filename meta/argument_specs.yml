@@ -1,0 +1,241 @@
+---
+argument_specs:
+  main:
+    short_description: Configure apt
+    options:
+      apt_aptitude_solution_cost:
+        description: |
+          Change Aptitudes solution costs, default is not to change anything. Mirror https://lists.debian.org/543FF3BD.1020609@zen.co.uk
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_auto_clean_interval:
+        description: 'Do "apt-get autoclean" every n-days (0=disable)'
+        type: int
+        default: 0
+        version_added: 1.0.0
+      apt_autoclean:
+        description: remove .deb files for packages no longer on your system
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_autoremove:
+        description: remove packages that are no longer needed for dependencies
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_cache_update:
+        description: Run apt-get update before installing/upgrading a package
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_cache_valid_time:
+        description: sets the amount of time the cache is valid
+        type: int
+        default: 3600
+        version_added: 1.0.0
+      apt_clean_sources_list:
+        description: Clean /etc/apt/sources.list
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_deb822_repositories:
+        description: deb822 repositories configuration
+        type: list
+        default: []
+        elements: dict
+        version_added: 1.0.0
+      apt_deb_packages:
+        description: .deb packages to install
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_dependencies:
+        description: depenencies packages
+        type: list
+        default:
+          - aptitude
+          - python3-apt
+          - python3-pycurl
+          - python3-debian
+        elements: str
+        version_added: 1.0.0
+      apt_download_upgradeable_packages:
+        description: Do "apt-get upgrade -download-only" every n-days (0=disable)
+        type: int
+        default: 0
+        version_added: 1.0.0
+      apt_install_recommends:
+        description: do not install Recommended packages by default
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_install_suggests:
+        description: whether or not suggested packages should be installed.
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_keys:
+        description: gpg keys for external repositories
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_mails:
+        description: List of apt mails items
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_package_state:
+        description: default package state
+        type: str
+        default: present
+        version_added: 1.0.0
+      apt_packages:
+        description: packages to ensure
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_periodic:
+        description: Enable the update/upgrade script
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_policy:
+        description: https://people.debian.org/~hmh/invokerc.d-policyrc.d-specification.txt
+        type: int
+        default: 101
+        version_added: 1.0.0
+      apt_preferences:
+        description: List of preferences options
+        type: list
+        default: []
+        elements: dict
+        version_added: 1.0.0
+      apt_remount_filesystems:
+        description: "remount file system: supported options are rootfs and tmpfs"
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_remove_purge:
+        description: purge configuration when removing packages
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_remove_recommends:
+        description: allow 'apt-get autoremove' to remove recommended packages
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_remove_suggests:
+        description: allow 'apt-get autoremove' to remove suggested packages
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_repositories:
+        description: repositories to register
+        type: list
+        default: []
+        elements: dict
+        version_added: 1.0.0
+      apt_unattended_upgrades:
+        description: enable unattended-upgrades
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_unattended_upgrades_allowed:
+        description: List of allowed-origins
+        type: list
+        default:
+          - ${distro_id}:${distro_codename}-security
+        elements: str
+        version_added: 1.0.0
+      apt_unattended_upgrades_automatic_reboot:
+        description: Automatically reboot if the file /var/run/reboot-required is found after the upgrade
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_unattended_upgrades_automatic_reboot_time:
+        description:  If automatic reboot is enabled and needed, reboot at the specific time instead of immediately
+        type: str
+        default: now
+        version_added: 1.0.0
+      apt_unattended_upgrades_automatic_reboot_with_users:
+        description: Automatically reboot even if there are users currently logged in
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_unattended_upgrades_autoremove:
+        description: Do automatic removal of new unused dependencies after the upgrade
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_unattended_upgrades_blacklist:
+        description: Upgrades blacklist ackages
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_unattended_upgrades_download_timer_override:
+        description: Override download timer
+        type: dict
+        version_added: 1.0.0
+      apt_unattended_upgrades_minimal_steps:
+        description: |
+          Split the upgrade into the smallest possible chunks so that
+          they can be interrupted with SIGUSR1. This makes the upgrade
+          a bit slower but it has the benefit that shutdown while a upgrade
+          is running is possible (with a small delay)
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_unattended_upgrades_notify_error_only:
+        description: |
+          Set this value to "true" to get emails only on errors. Default
+          is to always send a mail if Unattended-Upgrade::Mail is set
+        type: bool
+        default: true
+        version_added: 1.0.0
+      apt_unattended_upgrades_origins:
+        description: |
+          list of origins patterns to control which packages are upgraded
+          replaces allowed-origins, kept for compatibility
+        type: list
+        default: []
+        elements: str
+        version_added: 1.0.0
+      apt_unattended_upgrades_syslog_enable:
+        description: Enable logging to syslog
+        type: bool
+        default: false
+        version_added: 1.0.0
+      apt_unattended_upgrades_syslog_facility:
+        description: Specify syslog facility
+        type: str
+        default: daemon
+        version_added: 1.0.0
+      apt_unattended_upgrades_upgrade_timer_override:
+        description: Override upgrade timer 
+        type: dict
+        version_added: 1.0.0
+      apt_update_package_lists:
+        description: Do "apt-get update" automatically every n-days (0=disable)
+        type: int
+        default: 1
+        version_added: 1.0.0
+      apt_upgrade:
+        description: upgrade system
+        type: str
+        choices:
+          - no
+          - safe
+          - full
+          - dist
+        default: no
+        version_added: 1.0.0
+...
