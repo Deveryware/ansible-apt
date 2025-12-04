@@ -1,6 +1,7 @@
 ---
 
 - name: Upgrading system
+  become: true
   apt:
     upgrade: "{{ apt_upgrade }}"
     update_cache: "{{ apt_cache_update | default('yes') }}"

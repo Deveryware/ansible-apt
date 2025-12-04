@@ -1,6 +1,7 @@
 ---
 
 - name: Adding apt signing key
+  become: true
   apt_key:
     id: "{{ item.id | default(omit) }}"
     file: "{{ item.file | default(omit) }}"

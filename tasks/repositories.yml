@@ -1,5 +1,6 @@
 ---
 - name: Empty sources list
+  become: true
   ansible.builtin.copy:
     content: |
       # Ansible managed
@@ -8,6 +9,7 @@
   when: apt_clean_sources_list
 
 - name: Adding apt repository
+  become: true
   apt_repository:
     codename: "{{ item.codename | default(omit) }}"
     filename: "{{ item.filename | default(omit) }}"
@@ -18,6 +20,7 @@
   with_items: "{{ apt_repositories }}"
 
 - name: Configure deb822 repository
+  become: true
   ansible.builtin.deb822_repository:
     name: "{{ item.name }}"
     types: "{{ item.type | default('deb') }}"
@@ -29,6 +32,7 @@
   register: repo
 
 - name: Apt update
+  become: true
   ansible.builtin.apt:
     update_cache: yes
   when: repo.changed

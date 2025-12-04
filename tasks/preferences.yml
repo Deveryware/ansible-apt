@@ -1,6 +1,7 @@
 ---
 
 - name:  Configuring APT preferences
+  become: true
   template:
     src: etc/apt/preferences.d/preferences.j2
     dest: "/etc/apt/preferences.d/{{ item.file }}"

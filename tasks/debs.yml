@@ -1,6 +1,7 @@
 ---
 
 - name: Installing .deb packages
+  become: true
   apt:
     deb: "{{ item }}"
     autoremove: "{{ apt_autoremove }}"
