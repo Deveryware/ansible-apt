@@ -5,7 +5,7 @@ requires-python = "~=3.13.0"
 dependencies = ["commitizen"]
 
 [dependency-groups]
-dev = []
+dev = ["molecule", "testinfra", "molecule-plugins[docker]", "ansible-lint"]
 
 [tool.uv]
 package = false
