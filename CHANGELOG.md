@@ -1,3 +1,9 @@
+## 2.15.3 (2025-12-17)
+
+### Fix
+
+- add missing become true on privileged tasks (551e541)
+
 ## 2.15.2 (2025-12-04)
 
 ### Fix
