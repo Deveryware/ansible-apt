@@ -28,6 +28,7 @@
     suites: "{{ item.suites }}"
     components: "{{ item.components }}"
     signed_by: "{{ item.signed_by }}"
+    state: "{{ item.state | default('present') }}"
   loop: "{{ apt_deb822_repositories }}"
   register: repo
 
