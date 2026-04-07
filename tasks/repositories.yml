@@ -10,30 +10,23 @@
 
 - name: Adding apt repository
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     codename: "{{ item.codename | default(omit) }}"
     filename: "{{ item.filename | default(omit) }}"
     mode: "{{ item.mode | default(omit) }}"
     repo: "{{ item.repo | default(omit) }}"
     state: "{{ item.state | default(omit) }}"
     update_cache: "{{ item.update_cache | default('yes') }}"
-  with_items: "{{ apt_repositories }}"
+  loop: "{{ apt_repositories }}"
+  register: apt_repo
 
-- name: Configure deb822 repository
-  become: true
-  ansible.builtin.deb822_repository:
-    name: "{{ item.name }}"
-    types: "{{ item.type | default('deb') }}"
-    uris: "{{ item.uris }}"
-    suites: "{{ item.suites }}"
-    components: "{{ item.components }}"
-    signed_by: "{{ item.signed_by }}"
-    state: "{{ item.state | default('present') }}"
-  loop: "{{ apt_deb822_repositories }}"
-  register: repo
+- name: Include deb822 tasks only if Ansible >= 2.15
+  ansible.builtin.include_tasks: deb822.yml
+  when:
+    - ansible_version.full is version('2.15', '>=')
 
 - name: Apt update
   become: true
   ansible.builtin.apt:
     update_cache: yes
-  when: repo.changed
+  when: (apt_repo is defined and apt_repo.changed) or (deb822_repo is defined and deb822_repo.changed)
