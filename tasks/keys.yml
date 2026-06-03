@@ -2,7 +2,7 @@
 
 - name: Adding apt signing key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     id: "{{ item.id | default(omit) }}"
     file: "{{ item.file | default(omit) }}"
     data: "{{ item.data | default(omit) }}"
@@ -12,3 +12,45 @@
     validate_certs: "{{ item.validate_certs | default(omit) }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ apt_keys }}"
+  # apt-key is deprecated in Debian 12 and Ubuntu 22.04+ and removed in Debian 13 and Ubuntu 24.04+
+  when: ansible_facts["distribution"] == 'Debian' and ansible_facts["distribution_major_version"] is version('12', '<=') or
+        ansible_facts["distribution"] == 'Ubuntu' and ansible_facts["distribution_major_version"] is version('22', '<=')
+
+
+# apt-key is removed in Debian 13 and Ubuntu 24.04+
+# manual operations to add/remove apt keys
+# FIXME: keyserver and validate_certs options are not supported in this block
+- name: Adding apt signing key (manual operations)
+  become: true
+  when: ansible_facts["distribution"] == 'Debian' and ansible_facts["distribution_major_version"] is version('13', '>=') or
+        ansible_facts["distribution"] == 'Ubuntu' and ansible_facts["distribution_major_version"] is version('24', '>=')
+  block:
+    - name: Get apt signing key from URL (manual)
+      ansible.builtin.get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.keyring }}"
+        mode: '0644'
+        force: true
+      with_items: "{{ apt_keys }}"
+      when:
+        - item.keyring is defined
+        - item.url is defined
+        - item.state is not defined or item.state == 'present'
+    - name: Create apt keyring file from provided key data (manual)
+      ansible.builtin.copy:
+        content: "{{ item.data }}"
+        dest: "{{ item.keyring }}"
+        mode: '0644'
+      with_items: "{{ apt_keys }}"
+      when:
+        - item.keyring is defined
+        - item.data is defined
+        - item.state is not defined or item.state == 'present'
+    - name: Remove key if requested (manual)
+      ansible.builtin.file:
+        state: absent
+        path: "{{ item.keyring }}"
+      with_items: "{{ apt_keys }}"
+      when:
+        - item.state is defined
+        - item.state == 'absent'

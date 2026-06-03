@@ -1,0 +1,26 @@
+---
+apt_cache_valid_time: 7200
+apt_packages:
+  - vim
+  - tree
+  - name: ca-certificates
+    state: latest
+    hold: true
+  - name: zsh
+    state: absent
+    purge: true
+apt_mails:
+  - root
+apt_preferences:
+  - file: perl
+    package: perl
+    pin: "version 5.20*"
+    priority: 1001
+apt_unattended_upgrades_notify_error_only: false
+apt_remove_recommends: true
+apt_remove_suggests: true
+apt_remove_purge: true
+apt_keys:
+  - id: 35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    keyring: /etc/apt/trusted.gpg.d/kubernetes.gpg

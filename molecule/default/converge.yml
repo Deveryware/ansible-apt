@@ -1,0 +1,8 @@
+---
+
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - ansible-apt
+  # vars are defined in group_vars/all.yml

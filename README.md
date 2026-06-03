@@ -28,7 +28,7 @@
 Using `ansible-galaxy`:
 
 ```shell
-$ ansible-galaxy install weareinteractive.apt
+ansible-galaxy install weareinteractive.apt
 ```
 
 Using `requirements.yml`:
@@ -40,7 +40,7 @@ Using `requirements.yml`:
 Using `git`:
 
 ```shell
-$ git clone https://github.com/weareinteractive/ansible-apt.git weareinteractive.apt
+git clone https://github.com/weareinteractive/ansible-apt.git weareinteractive.apt
 ```
 
 ## Dependencies
@@ -227,7 +227,6 @@ These are the handlers that are defined in `handlers/main.yml`.
 
 ```
 
-
 ## Usage
 
 This is an example playbook:
@@ -266,16 +265,16 @@ This is an example playbook:
 
 ```
 
-
 ## Testing
 
 ```shell
-$ git clone https://github.com/weareinteractive/ansible-apt.git
-$ cd ansible-apt
-$ make test
+git clone https://github.com/weareinteractive/ansible-apt.git
+cd ansible-apt
+uv run molecule test
 ```
 
 ## Contributing
+
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
 
 1. Fork it
@@ -287,9 +286,10 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 *Note: To update the `README.md` file please install and run `ansible-role`:*
 
 ```shell
-$ gem install ansible-role
-$ ansible-role docgen
+gem install ansible-role
+ansible-role docgen
 ```
 
 ## License
+
 Copyright (c) We Are Interactive under the MIT license.

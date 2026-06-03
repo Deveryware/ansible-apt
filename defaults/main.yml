@@ -22,7 +22,7 @@
 #     state: present
 #     update_cache: yes
 
-# depenencies packages
+# dependencies packages
 apt_dependencies:
   - aptitude
   - python3-apt
