@@ -1,3 +1,15 @@
+## 2.17.0 (2026-06-03)
+
+### Feat
+
+- use deb822 only if ansible >=2.15 (57d727c)
+
+## 2.16.0 (2026-03-13)
+
+### Feat
+
+- Add state for deb822 repositories (e405a4d)
+
 ## 2.15.3 (2025-12-17)
 
 ### Fix
